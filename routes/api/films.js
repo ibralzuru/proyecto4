@@ -1,8 +1,10 @@
 const router = require('express').Router();
 const { Clientes } = require('../../db');
 const { Film } = require('../../db');
+const { Reservas } = require('../../db');
 const films = require('../../models/films');
 const clientes = require('../../models/clientes');
+const reservas = require('../../models/reservas');
 
 
  router.get('/', (req,res) =>{
@@ -22,7 +24,12 @@ router.post('/', async (req, res) => {
     console.log(req.body);
     const clientes = await Clientes.create(req.body);
   return  res.json(clientes);
-})
+});
+router.post('/', async (req, res) => {
+  console.log(req.body);
+  const reservas = await Reservas.create(req.body);
+return  res.json(reservas);
+});
 router.put('/:filmId', async (req, res) => {
     await Film.update(req.body,{
         where: { id: req.params.filmId }
